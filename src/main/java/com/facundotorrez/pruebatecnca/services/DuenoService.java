@@ -27,4 +27,48 @@ public class DuenoService implements IDueñoService {
 		return dueñoRepository.findById(id);
 	}
 
+	@Override
+	public Optional<Dueño> listarDNI(long dni) throws Exception {
+		// TODO Auto-generated method stub
+		return dueñoRepository.findByDni(dni);
+	}
+
+	@Override
+	public Dueño saveOrUpdate(Dueño dueño) {
+		// TODO Auto-generated method stub
+		int idDueño = dueño.getIdDueño();
+		Optional<Dueño> dueñobd = dueñoRepository.findById(idDueño);
+		if( dueñobd.isEmpty() ) {
+			return dueñoRepository.save(dueño);
+		}else {
+			map(dueño, dueñobd.get());
+			return dueñoRepository.save(dueñobd.get());
+		}
+	}
+
+
+	@Override
+	public void delete(int id) throws Exception {
+		// TODO Auto-generated method stub
+		if (dueñoRepository.findById(id) == null)
+			throw new Exception("La persona con id: " + id + " no existe");
+		else dueñoRepository.deleteById(id);
+		
+	}
+	
+	void map(Dueño registroModificado, Dueño preModificado ){
+			
+			if(registroModificado.getApellido()!=null) {
+				preModificado.setApellido(registroModificado.getApellido());
+			}
+			if (registroModificado.getNombre()!=null) {
+				preModificado.setNombre(registroModificado.getNombre());
+			}
+			if (registroModificado.getTipoDueño()!=null) {
+				preModificado.setTipoDueño(registroModificado.getTipoDueño());
+			}
+	}
+	
+	
+
 }

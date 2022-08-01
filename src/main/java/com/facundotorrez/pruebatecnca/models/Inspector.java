@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="inspectors")
@@ -42,8 +45,8 @@ public class Inspector {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@OneToMany(mappedBy = "inspector",cascade = CascadeType.ALL)
-	private Set<VehiculoInspector> vehiculosInspectoreSet = new HashSet<>();
+	@OneToMany(mappedBy = "inspector",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private Set<VehiculoInspector> vehiculosInspectores = new HashSet<>();
 
 	public Inspector() {
 		super();
@@ -108,12 +111,12 @@ public class Inspector {
 		this.updatedAt = updatedAt;
 	}
 
-	public Set<VehiculoInspector> getVehiculosInspectoreSet() {
-		return vehiculosInspectoreSet;
+	public Set<VehiculoInspector> getVehiculosInspectores() {
+		return vehiculosInspectores;
 	}
 
-	public void setVehiculosInspectoreSet(Set<VehiculoInspector> vehiculosInspectoreSet) {
-		this.vehiculosInspectoreSet = vehiculosInspectoreSet;
+	public void setVehiculosInspectores(Set<VehiculoInspector> vehiculosInspectoreSet) {
+		this.vehiculosInspectores = vehiculosInspectoreSet;
 	}
 	
 	

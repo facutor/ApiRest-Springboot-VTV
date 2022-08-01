@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="vehiculos_inspectores")
 public class VehiculoInspector {
@@ -23,12 +26,14 @@ public class VehiculoInspector {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idVehiculoInspector;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_vehiculo")
+	@JsonIgnoreProperties(value ="vehiculosInspectores")
 	private Vehiculo vehiculo;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_inspector")
+	@JsonIgnoreProperties(value ="vehiculosInspectores")
 	private Inspector inspector;
 	
 	@Column(name="createdat")

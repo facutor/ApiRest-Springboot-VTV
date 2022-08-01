@@ -45,7 +45,7 @@ public class Dueño {
 	private LocalDateTime updatedAt;
 	
 	@JsonBackReference
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="dueño")
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="dueño")
 	private Set<Vehiculo> vehiculos;
 	
 	@Column(name="tipo_dueño", nullable = false )
@@ -135,6 +135,12 @@ public class Dueño {
 
 	public void setTipoDueño(TipoDueño tipoDueño) {
 		this.tipoDueño = tipoDueño;
+	}
+
+	@Override
+	public String toString() {
+		return "Dueño [idDueño=" + idDueño + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", tipoDueño=" + tipoDueño + "]";
 	}
 	
 	

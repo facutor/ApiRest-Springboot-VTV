@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name="vehiculos")
@@ -47,7 +49,8 @@ public class Vehiculo {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_dueño",nullable=false)
 	private Dueño dueño;
-	@OneToMany(mappedBy = "vehiculo")
+	
+	@OneToMany(mappedBy = "vehiculo",fetch = FetchType.LAZY, orphanRemoval = true )
 	private Set<VehiculoInspector> vehiculosInspectores = new HashSet<>();
 
 	public Vehiculo() {
