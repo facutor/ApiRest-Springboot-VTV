@@ -9,4 +9,5 @@ import com.facundotorrez.pruebatecnca.models.VehiculoInspector;
 public interface IVehiculoInspectorService  {
 	public List<VehiculoInspector>list();
 	public Optional<VehiculoInspector>traerById(int id);
-}
+	public List<VehiculoInspector>traerInspeccionesPorIdDueño(int idDueño);
+	}

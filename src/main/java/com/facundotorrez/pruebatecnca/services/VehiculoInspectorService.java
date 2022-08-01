@@ -26,7 +26,13 @@ public class VehiculoInspectorService implements IVehiculoInspectorService{
 	@Override
 	public Optional<VehiculoInspector> traerById(int id) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return vehiculoInspectorRepository.findById(id);
+	}
+
+	@Override
+	public List<VehiculoInspector> traerInspeccionesPorIdDueño(int idDueño) {
+		// TODO Auto-generated method stub
+		return vehiculoInspectorRepository.findInspeccionByIdDueño(idDueño);
 	}
 	
 	
