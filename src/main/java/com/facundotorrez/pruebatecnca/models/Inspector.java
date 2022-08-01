@@ -45,7 +45,7 @@ public class Inspector {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@OneToMany(mappedBy = "inspector",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "inspector",cascade = CascadeType.ALL)
 	private Set<VehiculoInspector> vehiculosInspectores = new HashSet<>();
 
 	public Inspector() {

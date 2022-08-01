@@ -46,7 +46,7 @@ public class Vehiculo {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_dueño",nullable=false)
 	private Dueño dueño;
 	

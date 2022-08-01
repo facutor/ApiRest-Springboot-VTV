@@ -26,12 +26,12 @@ public class VehiculoInspector {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idVehiculoInspector;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_vehiculo")
 	@JsonIgnoreProperties(value ="vehiculosInspectores")
 	private Vehiculo vehiculo;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_inspector")
 	@JsonIgnoreProperties(value ="vehiculosInspectores")
 	private Inspector inspector;

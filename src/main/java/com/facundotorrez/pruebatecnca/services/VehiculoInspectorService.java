@@ -20,7 +20,7 @@ public class VehiculoInspectorService implements IVehiculoInspectorService{
 	@Override
 	public List<VehiculoInspector> list() {
 		// TODO Auto-generated method stub
-		return vehiculoInspectorRepository.listarInspecciones();
+		return vehiculoInspectorRepository.findAll();
 	}
 
 	@Override
