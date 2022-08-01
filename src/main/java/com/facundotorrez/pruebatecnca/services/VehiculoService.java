@@ -9,11 +9,10 @@ import org.springframework.stereotype.Service;
 import com.facundotorrez.pruebatecnca.interfaceServices.IVehiculoService;
 import com.facundotorrez.pruebatecnca.models.Vehiculo;
 import com.facundotorrez.pruebatecnca.repositories.IVehiculoRepository;
-
 @Service
-public class VehiculoService implements IVehiculoService {
+public class VehiculoService implements IVehiculoService{
 	@Autowired
-	private IVehiculoRepository  vehiculoRepository;
+	private IVehiculoRepository vehiculoRepository;
 
 	@Override
 	public List<Vehiculo> listar() {
@@ -22,13 +21,12 @@ public class VehiculoService implements IVehiculoService {
 	}
 
 	@Override
-	public Optional<Vehiculo> traerById(int id) {
+	public Optional<Vehiculo> listarId(int id) {
 		// TODO Auto-generated method stub
 		return vehiculoRepository.findById(id);
 	}
-
 	@Override
-	public Optional<Vehiculo> traerByDominio(String dominio) {
+	public Optional<Vehiculo> listarDominio(String dominio) {
 		// TODO Auto-generated method stub
 		return vehiculoRepository.findByDominio(dominio);
 	}
@@ -47,16 +45,6 @@ public class VehiculoService implements IVehiculoService {
 		
 	}
 	
-
-	@Override
-	public void delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		if (vehiculoRepository.findById(id).isEmpty()) {
-			throw new Exception("El vehiculo con id: " + id + " no existe");
-		}else vehiculoRepository.deleteById(id);
-	
-	}
-	
 	void map(Vehiculo vehiculoModificado, Vehiculo preModificado) {
 		if(vehiculoModificado.getMarca()!=null) {
 			preModificado.setMarca(vehiculoModificado.getMarca());
@@ -67,6 +55,15 @@ public class VehiculoService implements IVehiculoService {
 		if(vehiculoModificado.getDominio()!=null) {
 			preModificado.setDominio(vehiculoModificado.getDominio());
 		}
+	}
+
+	@Override
+	public void delete(int id) throws Exception {
+		// TODO Auto-generated method stub
+		if (vehiculoRepository.findById(id).isEmpty()) {
+			throw new Exception("El vehiculo con id: " + id + " no existe");
+		}else vehiculoRepository.deleteById(id);
+	
 	}
 	
 

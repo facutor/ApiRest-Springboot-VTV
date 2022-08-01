@@ -45,7 +45,7 @@ public class Dueño {
 	private LocalDateTime updatedAt;
 	
 	@JsonBackReference
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="dueño")
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="dueño")
 	private Set<Vehiculo> vehiculos;
 	
 	@Column(name="tipo_dueño", nullable = false )
