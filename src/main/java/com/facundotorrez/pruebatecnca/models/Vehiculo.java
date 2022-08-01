@@ -34,7 +34,7 @@ public class Vehiculo {
 	private String dominio;
 	
 	@Column(name="modelo", nullable=false,length = 45)
-	private long modelo;
+	private String modelo;
 	
 	@Column(name="createdat")
 	@CreationTimestamp
@@ -53,7 +53,7 @@ public class Vehiculo {
 	public Vehiculo() {
 		super();
 	}
-	public Vehiculo(String marca, String dominio, long modelo, LocalDateTime createdAt, LocalDateTime updatedAt,
+	public Vehiculo(String marca, String dominio, String modelo, LocalDateTime createdAt, LocalDateTime updatedAt,
 			Dueño dueño) {
 		super();
 		this.marca = marca;
@@ -96,12 +96,12 @@ public class Vehiculo {
 	}
 
 
-	public long getModelo() {
+	public String getModelo() {
 		return modelo;
 	}
 
 
-	public void setModelo(long modelo) {
+	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
 

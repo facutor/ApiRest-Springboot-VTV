@@ -15,8 +15,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import com.facundotorrez.pruebatecnca.models.Dueño.TipoDueño;
 @Entity
 @Table(name="vehiculos_inspectores")
 public class VehiculoInspector {

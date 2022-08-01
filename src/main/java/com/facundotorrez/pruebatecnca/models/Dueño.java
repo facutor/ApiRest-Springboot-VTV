@@ -61,6 +61,86 @@ public class Dueño {
 		super();
 	}
 
+	public Dueño(int idDueño, String nombre, String apellido, long dni, LocalDateTime createdAt,
+			LocalDateTime updatedAt, TipoDueño tipoDueño) {
+		super();
+		this.idDueño = idDueño;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.tipoDueño = tipoDueño;
+	}
+
+	public int getIdDueño() {
+		return idDueño;
+	}
+
+	public void setIdDueño(int idDueño) {
+		this.idDueño = idDueño;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public long getDni() {
+		return dni;
+	}
+
+	public void setDni(long dni) {
+		this.dni = dni;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Set<Vehiculo> getVehiculos() {
+		return vehiculos;
+	}
+
+	public void setVehiculos(Set<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public TipoDueño getTipoDueño() {
+		return tipoDueño;
+	}
+
+	public void setTipoDueño(TipoDueño tipoDueño) {
+		this.tipoDueño = tipoDueño;
+	}
+	
+	
+	
+	
+
 	
 	
 	
