@@ -1,0 +1,148 @@
+package com.facundotorrez.pruebatecnca.models;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+
+@Entity
+@Table(name="vehiculos")
+public class Vehiculo {
+	@Id
+	@Column(name="id_vehiculo")
+	@GeneratedValue(strategy =GenerationType.IDENTITY )
+	private int idVehiculo;
+	
+	@Column(name="marca", nullable=false, length=45)
+	private String marca;
+	
+	@Column(name="dominio", nullable=false, length=45)
+	private String dominio;
+	
+	@Column(name="modelo", nullable=false,length = 45)
+	private long modelo;
+	
+	@Column(name="createdat")
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@Column(name="updatedat")
+	@UpdateTimestamp
+	private LocalDateTime updatedAt;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_dueño",nullable=false)
+	private Dueño dueño;
+	@OneToMany(mappedBy = "vehiculo")
+	private Set<VehiculoInspector> vehiculosInspectores = new HashSet<>();
+
+	public Vehiculo() {
+		super();
+	}
+	public Vehiculo(String marca, String dominio, long modelo, LocalDateTime createdAt, LocalDateTime updatedAt,
+			Dueño dueño) {
+		super();
+		this.marca = marca;
+		this.dominio = dominio;
+		this.modelo = modelo;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.dueño = dueño;
+	}
+
+
+
+	public int getIdVehiculo() {
+		return idVehiculo;
+	}
+
+
+	public void setIdVehiculo(int idVehiculo) {
+		this.idVehiculo = idVehiculo;
+	}
+
+
+	public String getMarca() {
+		return marca;
+	}
+
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+
+	public String getDominio() {
+		return dominio;
+	}
+
+
+	public void setDominio(String dominio) {
+		this.dominio = dominio;
+	}
+
+
+	public long getModelo() {
+		return modelo;
+	}
+
+
+	public void setModelo(long modelo) {
+		this.modelo = modelo;
+	}
+
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+
+	public Dueño getDueño() {
+		return dueño;
+	}
+
+
+	public void setDueño(Dueño dueño) {
+		this.dueño = dueño;
+	}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+
+}
