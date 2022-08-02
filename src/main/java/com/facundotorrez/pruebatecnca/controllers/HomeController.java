@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+
 public class HomeController {
 	
-	@GetMapping("")
+	@GetMapping({"/index","/home","/"})
 	public String inicio() {
-		return "redirect:/inspectores/new";
+		return "/home";
 	}
 
 }

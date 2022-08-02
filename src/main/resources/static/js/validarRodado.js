@@ -5,7 +5,8 @@ const expresiones = {
 
 const campos = {
 	dominio: false,
-    vehiculo: false,
+    marca: false,
+    modelo: false
 };
 
 const formulario = document.getElementById("form");
@@ -17,9 +18,12 @@ const validarFormulario = (evento)=>{
         case "dominio":
             validarCampo(expresiones.dominio , evento.target , "dominio");
             break;
-        case "vehiculo":
-            validarCampo(expresiones.vehiculo , evento.target , "vehiculo");
-            break;             
+        case "marca":
+            validarCampo(expresiones.vehiculo , evento.target , "marca");
+            break; 
+        case "modelo":
+            validarCampo(expresiones.vehiculo , evento.target , "modelo");
+            break;            
     }
 }
 
@@ -58,10 +62,14 @@ const validarCamposAgregados = () =>{
         case "dominio":
             validarCampo(expresiones.dominio , inputs[i] , "dominio");
             break;
-        case "vehiculo":
-            validarCampo(expresiones.vehiculo , inputs[i] , "vehiculo");
+        case "marca":
+            validarCampo(expresiones.vehiculo , inputs[i] , "marca");
             break;     
+		case "modelo":
+            validarCampo(expresiones.vehiculo , inputs[i] , "modelo");
+            break; 
 		}
+		
 	}
 }
 
@@ -74,7 +82,7 @@ if(inputs[2].value !== "" && inputs[3].value !== ""){
 
 formulario.addEventListener("submit", (e) =>{
  
-    if(!campos.dominio || !campos.vehiculo){
+    if(!campos.dominio || !campos.marca || !campos.modelo){
 	
 	    e.preventDefault();
         

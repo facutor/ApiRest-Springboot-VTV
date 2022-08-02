@@ -56,6 +56,10 @@ public class Vehiculo {
 	public Vehiculo() {
 		super();
 	}
+	
+
+
+
 	public Vehiculo(String marca, String dominio, String modelo, LocalDateTime createdAt, LocalDateTime updatedAt,
 			Dueño dueño) {
 		super();
@@ -66,6 +70,7 @@ public class Vehiculo {
 		this.updatedAt = updatedAt;
 		this.dueño = dueño;
 	}
+
 
 
 

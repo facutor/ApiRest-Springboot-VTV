@@ -12,4 +12,6 @@ public interface IVehiculoInspectorService  {
 	public Optional<VehiculoInspector>traerById(int id);
 	public List<VehiculoInspector>traerEstado(Estado estado);
 	public List<VehiculoInspector>traerInspeccionesPorIdDueño(int idDueño);
-	}
+	public VehiculoInspector saveOrUpdate(VehiculoInspector i) throws Exception;
+	public void delete(int id) throws Exception;
+}

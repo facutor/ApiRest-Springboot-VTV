@@ -69,6 +69,7 @@ public class InspectorController {
 			return new ResponseEntity<Inspector>(inspectorService.saveOrUpdate(inspectorModificado), HttpStatus.OK);
 		}
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@PostMapping("/save")
 	public String guardar(@Validated @ModelAttribute("inspector") Inspector p, Model model) {
@@ -80,7 +81,7 @@ public class InspectorController {
 			model.addAttribute("errorMsg",e.getMessage());
 			return "persona/agregarPersona";
 		}
-		return "persona/agregarPersona";
+		return "/home";
 	}
 	
 	@GetMapping("/new")

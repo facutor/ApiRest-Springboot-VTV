@@ -1,20 +1,24 @@
 package com.facundotorrez.pruebatecnca.controllers;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.facundotorrez.pruebatecnca.interfaceServices.IDueñoService;
 import com.facundotorrez.pruebatecnca.interfaceServices.IVehiculoService;
+import com.facundotorrez.pruebatecnca.models.Inspector;
 import com.facundotorrez.pruebatecnca.models.Vehiculo;
 
 @RequestMapping("/vehiculos")
@@ -22,6 +26,8 @@ import com.facundotorrez.pruebatecnca.models.Vehiculo;
 public class VehiculoController {
 	@Autowired
 	private IVehiculoService vehiculoService;
+	@Autowired
+	private IDueñoService dueñoService;
 	
 	@GetMapping("/lista")
 	public ResponseEntity<?> traerVehiculos(){
@@ -62,6 +68,28 @@ public class VehiculoController {
 			vehiculo.setIdVehiculo(id);
 			return new ResponseEntity<Vehiculo>(vehiculoService.saveOrUpdate(vehiculo), HttpStatus.OK);
 		}
+	}
+	
+	////////////////////////////////////////////////////
+	@PostMapping("/save")
+	public String guardar(@Validated @ModelAttribute("vehiculo") Vehiculo p, Model model) {
+		
+		try {
+			System.out.println(p);
+			vehiculoService.saveOrUpdate(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			model.addAttribute("errorMsg",e.getMessage());
+			return "vehiculo/agregarVehiculo";
+		}
+		return "persona/agregarPersona";
+	}
+	
+	@GetMapping("/new")
+	public String agregar(Model model) {
+		model.addAttribute("vehiculo",new Vehiculo());
+		model.addAttribute("duenios", dueñoService.listar());
+		return "vehiculo/agregarVehiculo";
 	}
 
 }
