@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -54,6 +57,7 @@ public class InspectorController {
 			return new ResponseEntity<String>("El inspector ingresado ya exite", HttpStatus.OK);
 		}	
 	}
+	
 	@PutMapping("/actualizar/{id}")
 	public ResponseEntity<?> actualizarInspector(@RequestBody Inspector inspectorModificado, @PathVariable(name = "id") int id) throws Exception{
 	
@@ -64,6 +68,25 @@ public class InspectorController {
 			inspectorModificado.setIdInspector(id);
 			return new ResponseEntity<Inspector>(inspectorService.saveOrUpdate(inspectorModificado), HttpStatus.OK);
 		}
+	}
+	
+	@PostMapping("/save")
+	public String guardar(@Validated @ModelAttribute("inspector") Inspector p, Model model) {
+		
+		try {
+			inspectorService.saveOrUpdate(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			model.addAttribute("errorMsg",e.getMessage());
+			return "persona/agregarPersona";
+		}
+		return "persona/agregarPersona";
+	}
+	
+	@GetMapping("/new")
+	public String agregar(Model model) {
+		model.addAttribute("inspector",new Inspector());
+		return "persona/agregarPersona";
 	}
 
 }

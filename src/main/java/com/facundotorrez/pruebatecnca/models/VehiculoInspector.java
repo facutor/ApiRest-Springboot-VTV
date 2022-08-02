@@ -64,6 +64,7 @@ public class VehiculoInspector {
 		CONDICIONAL,
 		RECHAZADO
 	}
+	
 
 	public VehiculoInspector() {
 		super();

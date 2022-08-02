@@ -65,6 +65,8 @@ public class VehiculoService implements IVehiculoService{
 		}else vehiculoRepository.deleteById(id);
 	
 	}
+
+	
 	
 
 }

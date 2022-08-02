@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.facundotorrez.pruebatecnca.interfaceServices.IVehiculoInspectorService;
 import com.facundotorrez.pruebatecnca.models.Dueño;
 import com.facundotorrez.pruebatecnca.models.VehiculoInspector;
+import com.facundotorrez.pruebatecnca.models.VehiculoInspector.Estado;
 import com.facundotorrez.pruebatecnca.repositories.IVehiculoInspectorRepository;
 
 @Service
@@ -33,6 +34,12 @@ public class VehiculoInspectorService implements IVehiculoInspectorService{
 	public List<VehiculoInspector> traerInspeccionesPorIdDueño(int idDueño) {
 		// TODO Auto-generated method stub
 		return vehiculoInspectorRepository.findInspeccionByIdDueño(idDueño);
+	}
+
+	@Override
+	public List<VehiculoInspector> traerEstado(Estado estado) {
+		// TODO Auto-generated method stub
+		return vehiculoInspectorRepository.findVehiculoByEstado(estado);
 	}
 	
 	

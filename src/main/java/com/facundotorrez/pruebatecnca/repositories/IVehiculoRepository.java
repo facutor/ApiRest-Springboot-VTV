@@ -13,5 +13,6 @@ import com.facundotorrez.pruebatecnca.models.Vehiculo;
 public interface IVehiculoRepository extends JpaRepository<Vehiculo, Serializable>{
 	@Query("SELECT v FROM Vehiculo v  WHERE  v.dominio = (:dominio)")
 	public Optional<Vehiculo> findByDominio(@Param("dominio") String dominio);
+	
 
 }

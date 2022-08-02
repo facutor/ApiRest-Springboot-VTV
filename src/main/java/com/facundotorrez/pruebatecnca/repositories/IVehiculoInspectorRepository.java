@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.facundotorrez.pruebatecnca.models.VehiculoInspector;
+import com.facundotorrez.pruebatecnca.models.VehiculoInspector.Estado;
 @Repository
 public interface IVehiculoInspectorRepository extends JpaRepository<VehiculoInspector, Serializable>{
 	@Query("SELECT  i FROM VehiculoInspector i JOIN FETCH i.vehiculo JOIN FETCH i.inspector")
@@ -16,5 +17,8 @@ public interface IVehiculoInspectorRepository extends JpaRepository<VehiculoInsp
 	
 	@Query("SELECT i FROM VehiculoInspector i JOIN FETCH i.vehiculo v where v.dueño.idDueño=(:idDueño)")
 	public List<VehiculoInspector> findInspeccionByIdDueño(@Param("idDueño")int idDueño);
+	
+	@Query("SELECT i FROM VehiculoInspector i JOIN FETCH i.vehiculo where i.estado = (:estado)")
+	public List<VehiculoInspector> findVehiculoByEstado(@Param("estado")Estado estado);
 
 }
