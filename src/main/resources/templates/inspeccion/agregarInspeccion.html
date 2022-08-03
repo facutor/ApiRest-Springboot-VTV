@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Vehiculo</title>
+    <title>Agregar Inspeccion</title>
     <link rel="icon" th:href="@{/img/logo.ico}">
     
     <!--JQUERY-->
@@ -27,7 +27,8 @@
         <!--ENCABEZADO-->
         <header class="header">
 			<div class="header__contenedor">
-				<a th:href="@{/}" class="header__logo" >INICIO	</a>
+				<a th:href="@{/}" class="header__logo" >INICIO</a>
+				
                 <nav class="nav">
 					<a class="dropdown-toggle nav__enlace" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" 
 						aria-haspopup="true" aria-expanded="false">
@@ -35,8 +36,9 @@
 					</a>
 					<ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
 						<li><a th:href="@{/inspectores/new}" class="dropdown-item">Agregar Inspector</a></li>
+						<li><a th:href="@{/vehiculos/new}" class="dropdown-item">Agregar Vehiculo</a></li>
 						<li><a th:href="@{/conductores/new}" class="dropdown-item">Agregar Conductor</a></li>
-						<li><a th:href="@{/inspecciones/new}" class="dropdown-item">Agregar Inspeccion</a></li>
+
 					</ul>
 							
 						<a class="nav__enlace" th:href="@{/inspecciones/lista}">Listar Inpecciones Por Dueño</a>
@@ -53,54 +55,64 @@
 
 
 
-            <form th:action="@{/vehiculos/save}" th:object="${vehiculo}" method="POST" class="form" id="form">
-	             <input th:field="${vehiculo.idVehiculo}" type="hidden">
-               <!--Dominio-->
-                <div class="form__grupo" id="grupo__dominio">
-                    <label for="dominio" class="form__label">Dominio</label>
-                    <div class="form__grupo-input">
-                        <input th:field="${vehiculo.dominio}" type="text" name="dominio" class="form__input" id="dominio" placeholder="Ej:AAA111">
-                        <i class="fas fa-times-circle form__validacion-estado"></i>
-                    </div>
-                    <p class="form__error-input-msg">El dominio debe contener 3 letras y 3 numeros</p>
-                </div>
+            <form th:action="@{/inspecciones/save}" th:object="${inspeccion}" method="POST" class="form" id="form">
+	             <input th:field="${inspeccion.idVehiculoInspector}" type="hidden">
                 
-                <!--Marca-->
-                <div class="form__grupo" id="grupo__marca">
-                    <label for="marca" class="form__label">Marca</label>
-                    <div class="form__grupo-input">
-                        <input th:field="${vehiculo.marca}" type="text" name="marca" class="form__input" id="marca">
-                        <i class="fas fa-times-circle form__validacion-estado"></i>
-                    </div>
-                    <p class="form__error-input-msg">El vehiculo solo puede contener letras y espacios</p>
-                </div>
-                
-                <!--Modelo-->
-                <div class="form__grupo" id="grupo__modelo">
-                    <label for="modelo" class="form__label">Modelo</label>
-                    <div class="form__grupo-input">
-                        <input th:field="${vehiculo.modelo}" type="text" name="modelo" class="form__input" id="modelo">
-                        <i class="fas fa-times-circle form__validacion-estado"></i>
-                    </div>
-                    <p class="form__error-input-msg">El vehiculo solo puede contener letras y espacios</p>
-                </div>   
-
-
-                             
-                <!--ELEGIR CONDUCTOR-->
-                <div class="form__grupo">
-                    <label for="conductor" class="form__label">Elegir Conductor: </label>
+                <div class="form__grupo" id="grupo__medicion">
+                    <label for="medicion" class="form__label">MEDICION: </label>
                     <div class="form__grupo-input">
                     
-                        <select  th:field="${conductor.dni}" class="custom-select">
+                        <select th:field="${inspeccion.medicion}" class="custom-select">
                             <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
-                            <option th:each="c : ${conductores}" th:value="${c.dni}" th:text="${c.dni}" class="form__select-option" value=""></option>
+                            <option th:each="t : ${tipos}" th:value="${t}"  th:text="${t}"  class="form__select-option" value=""></option>
                          
                         </select>
                         
                     </div>
                 </div>
-
+                <!--OBSERVACION-->
+                   <div class="form__grupo" id="grupo__observacion">
+                         <label for="observacion" class="form__label">OBSERVACION: </label>
+                    <div class="form__grupo-input">
+                    
+                        <select th:field="${inspeccion.observacion}" class="custom-select">
+                            <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
+                            <option th:each="t : ${tipos}" th:value="${t}"  th:text="${t}"  class="form__select-option" value=""></option>
+                         
+                        </select>
+                        
+                    </div>
+                </div>
+                
+                                <!--ELEGIR VEHICULO-->
+               <div class="form__grupo">
+                    <label for="vehiculo" class="form__label">Elegir vehiculo: </label>
+                    <div class="form__grupo-input">
+                    
+                        <select  th:field="${vehiculo.dominio}" class="custom-select">
+                            <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
+                            <option th:each="v : ${vehiculos}" th:value="${v.dominio}" th:text="${v.dominio}" class="form__select-option" value=""></option>
+                         
+                        </select>
+                        
+                    </div>
+                </div>
+                 
+                                <!--ELEGIR Inspector-->
+                <div class="form__grupo">
+                    <label for="inspector" class="form__label">Elegir Inspector: </label>
+                    <div class="form__grupo-input">
+                    
+                        <select  th:field="${inspector.dni}" class="custom-select">
+                            <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
+                            <option th:each="i : ${inspectores}" th:value="${i.dni}" th:text="${i.dni}" class="form__select-option" value=""></option>
+                         
+                        </select>
+                        
+                    </div>
+                </div>                
+                
+              
             
                 <!--MSG DE ERROR-->
                 <div class="form__msg-error" id="form__msg-error">
@@ -110,7 +122,7 @@
                 <!--BUTTON-->
                 <div class="form__grupo form__grupo-button-enviar">
                     <button th:if="${editMode == null}" class="form__button" type="submit">AGREGAR</button>
-                    <button th:if="${editMode == true}" class="form__button" type="submit">MODIFICAR</button>
+                     <button th:if="${editMode == true}" class="form__button" type="submit">MODIFICAR</button>
                 </div>
                 
            
@@ -130,8 +142,7 @@
 			</div>
 		</footer>
    
-   <!--SCRIPT-->
-   
+  
        
 </body>
 </html>

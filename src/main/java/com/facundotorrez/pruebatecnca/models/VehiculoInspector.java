@@ -69,7 +69,8 @@ public class VehiculoInspector {
 	public VehiculoInspector() {
 		super();
 	}
-
+	
+	
 	public VehiculoInspector(Vehiculo vehiculo, Inspector inspector, LocalDateTime createdAt, LocalDateTime updatedAt,
 			float valor, Estado estado, Estado medicion, Estado observacion) {
 		super();
@@ -82,6 +83,7 @@ public class VehiculoInspector {
 		this.medicion = medicion;
 		this.observacion = observacion;
 	}
+
 
 	public int getIdVehiculoInspector() {
 		return idVehiculoInspector;
@@ -153,6 +155,14 @@ public class VehiculoInspector {
 
 	public void setObservacion(Estado observacion) {
 		this.observacion = observacion;
+	}
+
+
+	@Override
+	public String toString() {
+		return "VehiculoInspector [idVehiculoInspector=" + idVehiculoInspector + ", vehiculo=" + vehiculo
+				+ ", inspector=" + inspector + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", valor="
+				+ valor + ", estado=" + estado + ", medicion=" + medicion + ", observacion=" + observacion + "]";
 	}
 
 	

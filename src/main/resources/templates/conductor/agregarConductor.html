@@ -26,16 +26,24 @@
         <!--ENCABEZADO-->
         <header class="header">
 			<div class="header__contenedor">
-				<a class="header__logo" >Prueba Tecnica</a>
+				<a th:href="@{/}" class="header__logo" >INICIO</a>
 				
-				<nav class="nav">
-					
+                <nav class="nav">
+					<a class="dropdown-toggle nav__enlace" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" 
+						aria-haspopup="true" aria-expanded="false">
+						Agregar
+					</a>
 					<ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
-						<li><a th:href="@{/persona/new}" class="dropdown-item">Agregar Inspector</a></li>
-						<li><a th:href="@{/rodado/new}" class="dropdown-item">Agregar Vehiculo</a></li>
-						<li><a th:href="@{/permiso/newPermisoPeriodo}" class="dropdown-item">Agregar Inspecciones</a></li>
+						<li><a th:href="@{/inspectores/new}" class="dropdown-item">Agregar Inspector</a></li>
+						<li><a th:href="@{/vehiculos/new}" class="dropdown-item">Agregar Vehiculo</a></li>
+						<li><a th:href="@{/inspecciones/new}" class="dropdown-item">Agregar Inspeccion</a></li>
 					</ul>
-				</nav>
+							
+						<a class="nav__enlace" th:href="@{/inspecciones/lista}">Listar Inpecciones Por Dueño</a>
+						<a class="nav__enlace" th:href="@{/inspecciones/estado}" >Listar Inspecciones por Estado</a>
+				
+				
+			</nav>
 			</div>
         </header>
 
@@ -45,13 +53,13 @@
 
 
 
-            <form th:action="@{/inspectores/save}" th:object="${inspector}" method="POST" class="form" id="form">
+            <form th:action="@{/conductores/save}" th:object="${conductor}" method="POST" class="form" id="form">
 	             
                 <!--APELLIDO-->
                 <div class="form__grupo" id="grupo__apellido">
                     <label for="apellido" class="form__label">Apellido</label>
                     <div class="form__grupo-input">
-                        <input th:field="${inspector.apellido}" type="text" name="apellido" class="form__input" id="apellido">
+                        <input th:field="${conductor.apellido}" type="text" name="apellido" class="form__input" id="apellido">
                         <i class="fas fa-times-circle form__validacion-estado"></i>
                     </div>
                     <p class="form__error-input-msg">El apellido solo puede contener caracteres</p>
@@ -61,7 +69,7 @@
                 <div class="form__grupo" id="grupo__nombre">
                     <label for="nombre" class="form__label">Nombre</label>
                     <div class="form__grupo-input">
-                        <input th:field="${inspector.nombre}" type="text" name="nombre" class="form__input" id="nombre">
+                        <input th:field="${conductor.nombre}" type="text" name="nombre" class="form__input" id="nombre">
                         <i class="fas fa-times-circle form__validacion-estado"></i>
                     </div>
                     <p class="form__error-input-msg">El nombre solo puede contener caracteres</p>
@@ -71,13 +79,27 @@
                 <div class="form__grupo" id="grupo__dni">
                     <label for="documento" class="form__label">DNI</label>
                     <div class="form__grupo-input">              
-                        <input th:field="${inspector.dni}" placeholder="11111111" type="text" class="form__input" name="dni" id="dni">
+                        <input th:field="${conductor.dni}" placeholder="11111111" type="text" class="form__input" name="dni" id="dni">
                         <i class="fas fa-times-circle form__validacion-estado"></i>
                     </div>
                     <p class="form__error-input-msg">El dni debe contener 8 numeros</p>
                 </div>
     
-            
+             
+                <!--TIPO DUEÑO-->
+                <div class="form__grupo" id="grupo__tipo_duenio">
+                    <label for="tipo_duenio" class="form__label">Tipo Conductor: </label>
+                    <div class="form__grupo-input">
+                    
+                        <select th:field="${conductor.tipo}" class="custom-select">
+                            <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
+                            <option th:each="t : ${tipos}" th:value="${t}"  th:text="${t}"  class="form__select-option" value=""></option>
+                         
+                        </select>
+                        
+                    </div>
+                </div>
+
                 <!--MSG DE ERROR-->
                 <div class="form__msg-error" id="form__msg-error">
                     <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Porfavor rellene el formulario correctamente</p>

@@ -1,6 +1,7 @@
 package com.facundotorrez.pruebatecnca.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.facundotorrez.pruebatecnca.interfaceServices.IInspectorService;
 import com.facundotorrez.pruebatecnca.models.Dueño;
 import com.facundotorrez.pruebatecnca.models.Inspector;
+import com.facundotorrez.pruebatecnca.models.Vehiculo;
 import com.facundotorrez.pruebatecnca.repositories.IInspectorRepository;
 
 @RequestMapping("/inspectores")
@@ -81,13 +83,31 @@ public class InspectorController {
 			model.addAttribute("errorMsg",e.getMessage());
 			return "persona/agregarPersona";
 		}
-		return "/home";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/new")
 	public String agregar(Model model) {
 		model.addAttribute("inspector",new Inspector());
 		return "persona/agregarPersona";
+	}
+	
+	@GetMapping("/edit/{idInspector}")
+	public String editar(@PathVariable int idInspector, Model model) {
+		Optional<Inspector> inspector = inspectorService.traerId(idInspector);
+		
+		model.addAttribute("inspector", inspector.get());
+		model.addAttribute("inspectores", inspectorService.listar());
+		model.addAttribute("editMode", true);
+
+		
+		return "persona/agregarPersona";
+	}
+
+	@GetMapping("/delete/{idInspector}")
+	public String delete(Model model, @PathVariable int idInspector) throws Exception {
+		inspectorService.delete(idInspector);
+		return "redirect:/";
 	}
 
 }

@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.facundotorrez.pruebatecnca.interfaceServices.IDueñoService;
 import com.facundotorrez.pruebatecnca.models.Dueño;
+import com.facundotorrez.pruebatecnca.models.Dueño.TipoDueño;
 
-@RequestMapping("/dueño")
+@RequestMapping("/conductores")
 @Controller
 public class DueñoController {
 	@Autowired
@@ -67,5 +71,30 @@ public class DueñoController {
 		
 		
 	}
+
+
+
+	/************************************************ */
+
+	@PostMapping("/save")
+	public String guardar(@Validated @ModelAttribute("conductor") Dueño d, Model model) {
+		
+		try {
+			System.out.println(d);
+			dueñoService.saveOrUpdate(d);
+		} catch (Exception e) {
+			model.addAttribute("errorMsg",e.getMessage());
+			return "conductor/agregarConductor";
+		}
+		return "redirect:/";
+	}
+	
+	@GetMapping("/new")
+	public String agregar(Model model) {
+		model.addAttribute("conductor",new Dueño());
+		model.addAttribute("tipos", TipoDueño.values());
+		return "conductor/agregarConductor";
+	}
+
 
 }

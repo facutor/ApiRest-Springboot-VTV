@@ -55,9 +55,6 @@ public class InspectorService implements IInspectorService{
 		if (registroModificado.getNombre()!=null) {
 			preModificado.setNombre(registroModificado.getNombre());
 		}
-		if (registroModificado.getVehiculosInspectores()!=null) {
-			preModificado.setVehiculosInspectores(registroModificado.getVehiculosInspectores());
-		}
 }
 
 	@Override

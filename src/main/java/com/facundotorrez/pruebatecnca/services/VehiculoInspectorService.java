@@ -48,9 +48,13 @@ public class VehiculoInspectorService implements IVehiculoInspectorService{
 		int idVehiculoInspector = v.getIdVehiculoInspector();
 		Optional<VehiculoInspector> vehiculoiBd =vehiculoInspectorRepository.findById(idVehiculoInspector);
 		if (vehiculoiBd.isEmpty()) {
+			System.out.println("entro al service");
+			v.setEstado(determinarEstado(v.getMedicion(), v.getObservacion()));
+			System.out.println("estado "+v);
 			return vehiculoInspectorRepository.save(v);
 		}else {
 			map(v, vehiculoiBd.get());;
+			vehiculoiBd.get().setEstado(determinarEstado(vehiculoiBd.get().getMedicion(), vehiculoiBd.get().getObservacion()));
 			return vehiculoInspectorRepository.save(vehiculoiBd.get());
 		}
 		
@@ -77,7 +81,39 @@ public class VehiculoInspectorService implements IVehiculoInspectorService{
 	
 	}
 	
-	
+	public Estado determinarEstado(Estado medicion, Estado Observacion) {
+		String apto=Estado.APTO.name();
+		String condicional=Estado.CONDICIONAL.name();
+		String rechazado=Estado.RECHAZADO.name();
+		Estado resultado = null;
+		if (medicion.name().equals(apto)&&Observacion.name().equals(apto)) {
+			resultado = Estado.APTO;		
+		}
+		if (medicion.name().equals(rechazado)&&Observacion.name().equals(rechazado)) {
+			resultado = Estado.RECHAZADO;		
+		}
+		if (medicion.name().equals(apto)&&Observacion.name().equals(rechazado)) {
+			resultado = Estado.RECHAZADO;		
+		}
+		if (medicion.name().equals(rechazado)&&Observacion.name().equals(apto)) {
+			resultado = Estado.RECHAZADO;
+		}
+		if (medicion.name().equals(rechazado)&&Observacion.name().equals(condicional)) {
+			resultado = Estado.RECHAZADO;		
+		}
+		if (medicion.name().equals(condicional)&&Observacion.name().equals(rechazado)) {
+			resultado = Estado.RECHAZADO;		
+		}
+		if (medicion.name().equals(condicional)&&Observacion.name().equals(apto)) {
+			resultado = Estado.CONDICIONAL;		
+		}
+		if (medicion.name().equals(apto)&&Observacion.name().equals(condicional)) {
+			resultado = Estado.CONDICIONAL;		
+		}
+		return resultado;
+		
+		
+	}
 
 	
 

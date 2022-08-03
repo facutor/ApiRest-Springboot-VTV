@@ -35,6 +35,7 @@ public class VehiculoService implements IVehiculoService{
 	public Vehiculo saveOrUpdate(Vehiculo v) throws Exception {
 		// TODO Auto-generated method stub
 		int idVehiculo = v.getIdVehiculo();
+		System.out.println("ENTRE SERVICE "+ idVehiculo);
 		Optional<Vehiculo> vehiculoBd =vehiculoRepository.findById(idVehiculo);
 		if (vehiculoBd.isEmpty()) {
 			return vehiculoRepository.save(v);
@@ -55,6 +56,10 @@ public class VehiculoService implements IVehiculoService{
 		if(vehiculoModificado.getDominio()!=null) {
 			preModificado.setDominio(vehiculoModificado.getDominio());
 		}
+		if(vehiculoModificado.getDuenio()!=null){
+			preModificado.setDuenio(vehiculoModificado.getDuenio());
+		}
+		
 	}
 
 	@Override

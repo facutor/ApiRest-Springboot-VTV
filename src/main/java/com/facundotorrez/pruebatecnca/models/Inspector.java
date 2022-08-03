@@ -118,6 +118,12 @@ public class Inspector {
 	public void setVehiculosInspectores(Set<VehiculoInspector> vehiculosInspectoreSet) {
 		this.vehiculosInspectores = vehiculosInspectoreSet;
 	}
+
+	@Override
+	public String toString() {
+		return "Inspector [idInspector=" + idInspector + ", nombre=" + nombre + ", apellido=" + apellido + ", dni="
+				+ dni + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	}
 	
 	
 	

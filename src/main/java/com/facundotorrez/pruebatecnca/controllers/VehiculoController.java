@@ -1,5 +1,6 @@
 package com.facundotorrez.pruebatecnca.controllers;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.facundotorrez.pruebatecnca.interfaceServices.IDueñoService;
 import com.facundotorrez.pruebatecnca.interfaceServices.IVehiculoService;
+import com.facundotorrez.pruebatecnca.models.Dueño;
 import com.facundotorrez.pruebatecnca.models.Inspector;
 import com.facundotorrez.pruebatecnca.models.Vehiculo;
 
@@ -58,7 +61,8 @@ public class VehiculoController {
 		}
 		
 		
-	}@PutMapping("/actualizar/{id}")
+	}
+	@PutMapping("/actualizar/{id}")
 	public ResponseEntity<?> actualizarUsuario(@RequestBody Vehiculo vehiculo, @PathVariable(name = "id") int id) throws Exception{
 	
 		java.util.Optional<Vehiculo> v =vehiculoService.listarId(id);
@@ -72,24 +76,48 @@ public class VehiculoController {
 	
 	////////////////////////////////////////////////////
 	@PostMapping("/save")
-	public String guardar(@Validated @ModelAttribute("vehiculo") Vehiculo p, Model model) {
+	public String guardar(@Validated @ModelAttribute("vehiculo") Vehiculo vehiculo,
+			@Validated @ModelAttribute("conductor") Dueño dueño, Model model) {
 		
 		try {
-			System.out.println(p);
-			vehiculoService.saveOrUpdate(p);
+			System.out.println("vehicuo modificado"+vehiculo);
+			Optional<Dueño> dueñoBuscado = dueñoService.listarDNI(dueño.getDni());
+			vehiculo.setDuenio(dueñoBuscado.get());
+			vehiculoService.saveOrUpdate(vehiculo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			model.addAttribute("errorMsg",e.getMessage());
 			return "vehiculo/agregarVehiculo";
 		}
-		return "persona/agregarPersona";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/new")
 	public String agregar(Model model) {
+		model.addAttribute("conductor",new Dueño());
 		model.addAttribute("vehiculo",new Vehiculo());
-		model.addAttribute("duenios", dueñoService.listar());
+
+		model.addAttribute("conductores", dueñoService.listar());
 		return "vehiculo/agregarVehiculo";
+	}
+	@GetMapping("/edit/{idVehiculo}")
+	public String editar(@PathVariable int idVehiculo, Model model) {
+		Optional<Vehiculo> vehiculo = vehiculoService.listarId(idVehiculo);
+		System.out.println("  VEHICULO A EDIT  "+vehiculo.get());
+		model.addAttribute("vehiculo", vehiculo.get());
+		model.addAttribute("vehiculos", vehiculoService.listar());
+		model.addAttribute("editMode", true);
+		model.addAttribute("conductor",new Dueño());
+		model.addAttribute("conductores", dueñoService.listar());
+
+		
+		return "vehiculo/agregarVehiculo";
+	}
+
+	@GetMapping("/delete/{idVehiculo}")
+	public String delete(Model model, @PathVariable int idVehiculo) throws Exception {
+		vehiculoService.delete(idVehiculo);
+		return "redirect:/";
 	}
 
 }

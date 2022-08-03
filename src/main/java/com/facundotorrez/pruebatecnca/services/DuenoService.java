@@ -34,11 +34,11 @@ public class DuenoService implements IDueñoService {
 	}
 
 	@Override
-	public Dueño saveOrUpdate(Dueño dueño) {
+	public Dueño saveOrUpdate(Dueño dueño){
 		// TODO Auto-generated method stub
-		int idDueño = dueño.getIdDueño();
-		Optional<Dueño> dueñobd = dueñoRepository.findById(idDueño);
+		Optional<Dueño> dueñobd = dueñoRepository.findById(dueño.getIdDueño());
 		if( dueñobd.isEmpty() ) {
+			System.out.println("ENTRA ACA");
 			return dueñoRepository.save(dueño);
 		}else {
 			map(dueño, dueñobd.get());
@@ -64,8 +64,8 @@ public class DuenoService implements IDueñoService {
 			if (registroModificado.getNombre()!=null) {
 				preModificado.setNombre(registroModificado.getNombre());
 			}
-			if (registroModificado.getTipoDueño()!=null) {
-				preModificado.setTipoDueño(registroModificado.getTipoDueño());
+			if (registroModificado.getTipo()!=null) {
+				preModificado.setTipoDueño(registroModificado.getTipo());
 			}
 	}
 	
