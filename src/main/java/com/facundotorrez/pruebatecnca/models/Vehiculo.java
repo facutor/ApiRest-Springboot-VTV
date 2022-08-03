@@ -46,9 +46,9 @@ public class Vehiculo {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_dueño",nullable=false)
-	private Dueño dueño;
+	private Dueño duenio;
 	
 	@OneToMany(mappedBy = "vehiculo",fetch = FetchType.LAZY, orphanRemoval = true )
 	private Set<VehiculoInspector> vehiculosInspectores = new HashSet<>();
@@ -56,16 +56,21 @@ public class Vehiculo {
 	public Vehiculo() {
 		super();
 	}
+	
+
+
+
 	public Vehiculo(String marca, String dominio, String modelo, LocalDateTime createdAt, LocalDateTime updatedAt,
-			Dueño dueño) {
+			Dueño duenio) {
 		super();
 		this.marca = marca;
 		this.dominio = dominio;
 		this.modelo = modelo;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.dueño = dueño;
+		this.duenio = duenio;
 	}
+
 
 
 
@@ -129,15 +134,44 @@ public class Vehiculo {
 	}
 
 
-	public Dueño getDueño() {
-		return dueño;
+
+
+	public Dueño getDuenio() {
+		return duenio;
 	}
 
 
-	public void setDueño(Dueño dueño) {
-		this.dueño = dueño;
+
+
+	public void setDuenio(Dueño duenio) {
+		this.duenio = duenio;
 	}
-	
+
+
+
+
+	public Set<VehiculoInspector> getVehiculosInspectores() {
+		return vehiculosInspectores;
+	}
+
+
+
+
+	public void setVehiculosInspectores(Set<VehiculoInspector> vehiculosInspectores) {
+		this.vehiculosInspectores = vehiculosInspectores;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Vehiculo [idVehiculo=" + idVehiculo + ", marca=" + marca + ", dominio=" + dominio + ", modelo=" + modelo
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", duenio=" + duenio + "]";
+	}
+
+
+
 	
 
 	

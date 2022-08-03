@@ -26,12 +26,12 @@ public class VehiculoInspector {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idVehiculoInspector;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_vehiculo")
 	@JsonIgnoreProperties(value ="vehiculosInspectores")
 	private Vehiculo vehiculo;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_inspector")
 	@JsonIgnoreProperties(value ="vehiculosInspectores")
 	private Inspector inspector;
@@ -64,11 +64,13 @@ public class VehiculoInspector {
 		CONDICIONAL,
 		RECHAZADO
 	}
+	
 
 	public VehiculoInspector() {
 		super();
 	}
-
+	
+	
 	public VehiculoInspector(Vehiculo vehiculo, Inspector inspector, LocalDateTime createdAt, LocalDateTime updatedAt,
 			float valor, Estado estado, Estado medicion, Estado observacion) {
 		super();
@@ -81,6 +83,7 @@ public class VehiculoInspector {
 		this.medicion = medicion;
 		this.observacion = observacion;
 	}
+
 
 	public int getIdVehiculoInspector() {
 		return idVehiculoInspector;
@@ -152,6 +155,14 @@ public class VehiculoInspector {
 
 	public void setObservacion(Estado observacion) {
 		this.observacion = observacion;
+	}
+
+
+	@Override
+	public String toString() {
+		return "VehiculoInspector [idVehiculoInspector=" + idVehiculoInspector + ", vehiculo=" + vehiculo
+				+ ", inspector=" + inspector + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", valor="
+				+ valor + ", estado=" + estado + ", medicion=" + medicion + ", observacion=" + observacion + "]";
 	}
 
 	

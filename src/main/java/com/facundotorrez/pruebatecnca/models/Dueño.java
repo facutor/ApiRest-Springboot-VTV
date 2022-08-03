@@ -21,7 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="dueños")
+@Table(name="duenios")
 public class Dueño {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY )
@@ -45,12 +45,12 @@ public class Dueño {
 	private LocalDateTime updatedAt;
 	
 	@JsonBackReference
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="dueño")
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="duenio")
 	private Set<Vehiculo> vehiculos;
 	
 	@Column(name="tipo_dueño", nullable = false )
     @Enumerated(value = EnumType.ORDINAL)
-	private TipoDueño tipoDueño;
+	private TipoDueño tipo;
 	
 	public enum TipoDueño{
 		COMUN,
@@ -62,7 +62,7 @@ public class Dueño {
 	}
 
 	public Dueño(int idDueño, String nombre, String apellido, long dni, LocalDateTime createdAt,
-			LocalDateTime updatedAt, TipoDueño tipoDueño) {
+			LocalDateTime updatedAt, TipoDueño tipo) {
 		super();
 		this.idDueño = idDueño;
 		this.nombre = nombre;
@@ -70,7 +70,7 @@ public class Dueño {
 		this.dni = dni;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.tipoDueño = tipoDueño;
+		this.tipo = tipo;
 	}
 
 	public int getIdDueño() {
@@ -129,18 +129,18 @@ public class Dueño {
 		this.vehiculos = vehiculos;
 	}
 
-	public TipoDueño getTipoDueño() {
-		return tipoDueño;
+	public TipoDueño getTipo() {
+		return tipo;
 	}
 
 	public void setTipoDueño(TipoDueño tipoDueño) {
-		this.tipoDueño = tipoDueño;
+		this.tipo = tipoDueño;
 	}
 
 	@Override
 	public String toString() {
 		return "Dueño [idDueño=" + idDueño + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", tipoDueño=" + tipoDueño + "]";
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", tipoDueño=" + tipo + "]";
 	}
 	
 	

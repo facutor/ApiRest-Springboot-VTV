@@ -45,7 +45,7 @@ public class Inspector {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@OneToMany(mappedBy = "inspector",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "inspector",cascade = CascadeType.ALL)
 	private Set<VehiculoInspector> vehiculosInspectores = new HashSet<>();
 
 	public Inspector() {
@@ -117,6 +117,12 @@ public class Inspector {
 
 	public void setVehiculosInspectores(Set<VehiculoInspector> vehiculosInspectoreSet) {
 		this.vehiculosInspectores = vehiculosInspectoreSet;
+	}
+
+	@Override
+	public String toString() {
+		return "Inspector [idInspector=" + idInspector + ", nombre=" + nombre + ", apellido=" + apellido + ", dni="
+				+ dni + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 	
 	
